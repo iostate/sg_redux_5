@@ -23,7 +23,9 @@ class WeatherList extends Component {
 		const cityName = cityData.city.name; // city name from search query
 		const firstForecast = cityData.list[0]; // reference to first forecast
 		temperatureInKelvins = firstForecast.main.temp; // temperature from first forecast
-		const weatherInFahrenheit = this.convertKelvinToFahrenheit(temperatureInKelvins);
+		const weatherInFahrenheit = () => {
+			convertKelvinToFahrenheit(temperatureInKelvins);
+		}
 		const weather = firstForecast.weather[0].main; // retrieve general weather conditions
 		const humidity = firstForecast.main.humidity;
 		return (
