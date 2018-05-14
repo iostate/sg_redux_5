@@ -1,8 +1,12 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { fetchWeather } from '../actions/index';
 
 // Covers binding context
+// Mapping dispatch for search bar component (see exporting fetchWeather in connect)
 
-export default class SearchBar extends Component {
+class SearchBar extends Component {
 	constructor(props) {
 		super(props);
 
@@ -12,14 +16,17 @@ export default class SearchBar extends Component {
 	}
 
 	onInputChange(event) {
-		console.log(event.target.value);
 		this.setState({term: event.target.value});
 	}
 
 	onFormSubmit(event) {
 		event.preventDefault();
 
-		// write API request
+		console.log('City searched for: ', this.state.term);
+		// fetch weather data
+		this.props.fetchWeather(this.state.term);
+		// clear search input
+		this.setState({term: ''});
 
 	}
 
@@ -39,3 +46,10 @@ export default class SearchBar extends Component {
 		);
 	}
 }
+
+function mapDispatchToProps(dispatch) {
+	return bindActionCreators({ fetchWeather}, dispatch);
+}
+
+// Receives null instead of mapStateToProps
+export default connect(null, mapDispatchToProps)(SearchBar);
