@@ -7,8 +7,7 @@ export default function(state = [], action) {
 			// state.push(action.payload.data);
 			// only returning payload.data, where actual city forecast is being held
 			// return state.concat([ action.payload.data ]); 
-			console.log("REDUCER_WEATHER: action.payload.data" + action.payload.data);
-			return [ action.payload.data, ...state]; // this will push the array to the beginning
+			return [ action.payload.data, ...state]; // this will push the data to the beginning of state
 	}
 	return state;
 }
