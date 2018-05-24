@@ -1,16 +1,27 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
 import Chart from '../components/chart';
+import GoogleMap from '../components/google_map';
+import _ from 'lodash';
 /**
  * Displays the weather list
  */
 class WeatherList extends Component {
 
+	// The following code was to be used when converting kelvin to fahrenheit. 
+	// constructor(props) {
+	// 	super(props);
 
-	convertKelvinToFahrenheit(kelvins) {
-		console.log('Kelvins converted to Fahrenheit: ', ((kelvins - 273.15) * 1.8000) + 32.00);
-		return (((kelvins - 273.15) * 1.8000) + 32.00);
-	}
+	// 	this.kelvinToFahrenheit = this.kelvinToFahrenheit.bind(this);
+	// }
+
+
+	// kelvinToFahrenheit(kelvins) {
+	// 	// console.log('Kelvins converted to Fahrenheit: ', ((kelvins - 273.15) * 1.8000) + 32.00);
+	// 	return (((kelvins - 273.15) * 1.8000) + 32.00);
+	// }
+
+
 	/**
 	 * Create table rows with the city name. Responsible for rendering
 	 * a single row. 
@@ -22,10 +33,23 @@ class WeatherList extends Component {
 		const temps = cityData.list.map(weather => weather.main.temp); // kelvin units
 		const pressures = cityData.list.map(weather => weather.main.pressure); // measured in hectopascals
 		const humidities = cityData.list.map(weather => weather.main.humidity); 
+		const { lon, lat } = cityData.city.coord;
+
+
+		// const convertedToFahrenheit = _.map(cityData.list.map(weather => weather.main.temp), (temp) => {
+		// 	 (( temp - 273.15) * 1.8000) + 32.000;
+		// console.log(temp);
+		// });
+
+		// console.log("Convert to F = ");
+		// console.log(convertedToFahrenheit.toString());
+
+
+		
 
 		return (
 			<tr key={cityName}>
-				<td>{cityName} </td>
+				<td><GoogleMap lon={lon} lat={lat} /></td>
 				<td> <Chart data={temps} color="orange" units="K" /> </td>
 				<td> <Chart data={pressures} color="green" units="hPa" /> </td>
 				<td> <Chart data={humidities} color="orange" units="%" /> </td>
