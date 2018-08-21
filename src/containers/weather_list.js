@@ -35,18 +35,6 @@ class WeatherList extends Component {
 		const humidities = cityData.list.map(weather => weather.main.humidity); 
 		const { lon, lat } = cityData.city.coord;
 
-
-		// const convertedToFahrenheit = _.map(cityData.list.map(weather => weather.main.temp), (temp) => {
-		// 	 (( temp - 273.15) * 1.8000) + 32.000;
-		// console.log(temp);
-		// });
-
-		// console.log("Convert to F = ");
-		// console.log(convertedToFahrenheit.toString());
-
-
-		
-
 		return (
 			<tr key={cityName}>
 				<td><GoogleMap lon={lon} lat={lat} /></td>
